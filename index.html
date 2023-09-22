@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Alunos</title>
+</head>
+<body> 
+    <h1>Cadastro de Alunos </h1>
+    <form name="submit-to-google-sheet1">   
+    
+        <h2>Dados Pessoais</h2>
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" required><br>
+
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" name="email" required><br>
+
+        <label for="data_nascimento">Data de Nascimento:</label>
+        <input type="date" id="data_nascimento" name="data_nascimento" required><br>
+        <h2>Informações Adicionais</h2>
+        <label for="curso">Curso (apenas para alunos):</label>
+        <input type="text" id="curso" name="curso"><br>
+
+        <label for="disciplina">Disciplina (apenas para professores):</label>
+        <input type="text" id="disciplina" name="disciplina"><br>
+
+        <input type="submit" value="Cadastrar">
+    </form>
+    <form action="/teler/mostra_banco.php">
+    <input type="submit"  value="ver alunos  Cadastrados">
+</form>
+<script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbyLS2A7QEieQoQjOhAJ1DS11vAK8lzeBDeL-l0P8qIkPvlF2-ew5JE9vKJsvnRs_Omf/exec'
+    const form = document.forms['submit-to-google-sheet1']
+  
+    form.addEventListener('submit', e => {
+      e.preventDefault()
+      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+        .then(response => console.log('Success!', response))
+        .catch(error => console.error('Error!', error.message))
+      form.reset();
+    })
+  </script>
+    
+
+</body>
+</html>
